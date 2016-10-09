@@ -33,8 +33,21 @@ def setup():
 	# networking constants
 	port = 8080
 def handleRollPitch(roll, pitch):
-	roll = roll / 3
-	pitch = -pitch / 3
+	roll = roll / 2
+	pitch = pitch / 2
+	# don't let it turn more than 45 degrees
+	pitchmin = -math.pi / 4
+	pitchmax = math.pi / 4
+	rollmin = -math.pi / 4
+	rollmax = math.pi / 4
+	if (pitch < pitchmin):
+		pitch = pitchmin
+	elif pitch > pitchmax:
+		pitch = pitchmax
+	if (roll < rollmin):
+		roll = rollmin
+	elif (roll > rollmax):
+		roll = rollmax
 	# these angles are from neutral, ie from 90 degrees
 	pitchDutyCycle = 7.5 + 2.5*pitch/(math.pi/4)
 	rollDutyCycle = 7.5 + 2.5*roll/(math.pi/4)
